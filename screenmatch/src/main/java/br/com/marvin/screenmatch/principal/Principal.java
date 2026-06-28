@@ -5,6 +5,7 @@ import br.com.marvin.screenmatch.model.DadosTemporada;
 import br.com.marvin.screenmatch.model.Serie;
 import br.com.marvin.screenmatch.service.ConsumoApi;
 import br.com.marvin.screenmatch.service.ConverteDados;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,9 +16,11 @@ public class Principal {
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
     private ConverteDados conversor = new ConverteDados();
-    private final String ENDERECO = "https://www.omdbapi.com/?t=";
-    private final String API_KEY = "&apikey=54771532&";
     private List<DadosSerie> dadosSeries = new ArrayList<>();
+
+    Dotenv dotenv = Dotenv.load();
+    String API_KEY = dotenv.get("API_KEY");
+    String ENDERECO = dotenv.get("ENDERECO_OMDB");
 
     public void exibeMenu() {
         var opcao = -1;
