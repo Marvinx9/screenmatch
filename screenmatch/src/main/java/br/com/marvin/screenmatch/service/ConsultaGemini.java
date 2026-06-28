@@ -8,13 +8,14 @@ public class ConsultaGemini {
     public static String obterTraducao(String texto) {
         Dotenv dotenv = Dotenv.load();
         String apiKey = dotenv.get("GEMINI_API_KEY");
+        String model = dotenv.get("MODEL");
 
         Client client = Client.builder()
                 .apiKey(apiKey)
                 .build();
 
         GenerateContentResponse resposta = client.models.generateContent(
-                "gemini-2.5-flash",
+                model,
                 "Traduza para o português o texto: " + texto,
                 null
         );
