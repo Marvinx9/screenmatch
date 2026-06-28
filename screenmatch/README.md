@@ -4,13 +4,16 @@ Usando boas práticas de desenvolvimento
 
 *FUNCIONALIDADES DO PROJETO*
 
-consumo de api (omdb)
+Consumo de api (omdb)
 
-1 - Buscar séries
-2 - Buscar episódios
-3 - Listar histórico de séries
+BUSCAR SÉRIES
 
-0 - Sair
+Realiza busca de séries baseado no título
+
+BUSCAR EPISÓDIOS
+
+LISTAR HISTÓRICO DE SÉRIES
+
 
 Criar um menu com várias opções acessíveis no terminal
 Modelar as abstrações
