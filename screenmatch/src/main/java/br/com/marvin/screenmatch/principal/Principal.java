@@ -3,9 +3,9 @@ package br.com.marvin.screenmatch.principal;
 import br.com.marvin.screenmatch.model.DadosSerie;
 import br.com.marvin.screenmatch.model.DadosTemporada;
 import br.com.marvin.screenmatch.model.Serie;
+import br.com.marvin.screenmatch.repository.SerieRepository;
 import br.com.marvin.screenmatch.service.ConsumoApi;
 import br.com.marvin.screenmatch.service.ConverteDados;
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,16 +16,19 @@ public class Principal {
     private Scanner leitura = new Scanner(System.in);
     private ConsumoApi consumo = new ConsumoApi();
     private ConverteDados conversor = new ConverteDados();
-    private List<DadosSerie> dadosSeries = new ArrayList<>();
+    private SerieRepository repositorio;
 
-    Dotenv dotenv = Dotenv.load();
-    String API_KEY = dotenv.get("API_KEY");
-    String ENDERECO = dotenv.get("ENDERECO_OMDB");
+    public Principal(SerieRepository repository) {
+        this.repositorio = repository;
+    }
+
+    String API_KEY = System.getenv("API_KEY");
+    String ENDERECO = System.getenv("ENDERECO_OMDB");
 
     public void exibeMenu() {
         var opcao = -1;
 
-        while(opcao != 0) {
+        while (opcao != 0) {
             var menu = """
                     1 - Buscar séries
                     2 - Buscar episódios
@@ -59,8 +62,9 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
-        System.out.println(dados);
+        Serie serie = new Serie(dados);
+        repositorio.save(serie);
+        System.out.println(serie);
     }
 
     private DadosSerie getDadosSerie() {
@@ -84,8 +88,7 @@ public class Principal {
     }
 
     private void listarSeriesBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream().map(Serie::new).toList();
+        List<Serie> series = repositorio.findAll();
         series.stream().sorted(Comparator.comparing(Serie::getGenero)).forEach(System.out::println);
     }
 }
