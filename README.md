@@ -1,22 +1,16 @@
 ## ScreenMatch
 
-Usando boas práticas de desenvolvimento
+Usando boas práticas de desenvolvimento (injeção de dependência, responsabilidades em camadas)  
+Consumo da api (omdb)  
+Tradução para português da sinopse usando IA generativa  
+Persistência no banco de dados postgres via JPA  
 
 *FUNCIONALIDADES DO PROJETO*
 
-Consumo de api (omdb)
-
-BUSCAR SÉRIES
-
-Realiza busca de séries baseado no título
+BUSCAR SÉRIES  
+Realiza busca de séries com base no título e persiste no banco de dados postgres  
 
 BUSCAR EPISÓDIOS
 
-LISTAR HISTÓRICO DE SÉRIES
-
-
-Criar um menu com várias opções acessíveis no terminal
-Modelar as abstrações
-Consumir a API da OpenAI
-Persistência no banco de dados PostgreSQL com JPA
-Trbalhar com consultas no banco de dados
+LISTAR HISTÓRICO DE SÉRIES  
+Busca na base dados as séries já pesquisadas anteriormente  
